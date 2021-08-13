@@ -1,0 +1,6 @@
+customhost = "vehicle.cckg9zagbgji.us-east-1.rds.amazonaws.com"
+customuser = "Mohana"
+custompass = "Valar006"
+customdb = "Vehicle"
+custombucket = "vehiclesaddition"
+customregion = "us-east-1"

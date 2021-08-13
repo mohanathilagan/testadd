@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vehicle Registration</title>
+</head>
+<center>
+	<font color="black" size="4" style="font-family: avenir">
+
+		<h1 style="color: DodgerBlue">Vehicle Registration</h1>
+
+		<body bgcolor="lightsalmon">
+
+			<form action="/addvehicles" autocomplete="on" method = "POST" enctype="multipart/form-data">
+
+				<button type="submit" formaction="/getVehicleinfo" style="background: green; height: 45px; width: 200px; color:white; font:oblique;">GET VEHICLE INFORMATION</button><br><br>
+
+		  		Name:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="Name" autofocus size="40"><br><br>
+				
+               Address:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="Address"><br><br>
+
+                Phone:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="Phone"><br><br>
+
+                Email:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="Email"><br><br>
+ 
+		  		License:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="License"><br><br>
+				
+		  		Model:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="Model" ><br><br>
+
+		  		Color:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="Color"><br><br>
+
+		  	    Year:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="Year"><br><br>
+				
+				Owner:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="Owner"><br><br>	
+     
+                <p>Attach proof of vehicle ownership in the space below</p><br><br>	
+
+                Upload Document: <input type=file name="Upload_Document" style="height:25px;font-size:14pt;color:grey;">	<br><br>
+
+		  		<button type="submit" style="background: green; height: 45px; width: 200px; color: white; size: 5; font:oblique;">SUBMIT</button>
+
+			</form>
+<a href="/about">About Us</a>
+		</body>
+
+	</font>
+</center>
+</html>

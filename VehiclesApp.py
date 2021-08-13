@@ -18,12 +18,12 @@ db_conn = connections.Connection(
 
 )
 output = {}
-table = 'employee'
+table = 'VehicleDetails'
 
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('AddEmp.html')
+    return render_template('AddVehicles.html')
 
 
 @app.route("/about", methods=['POST'])
@@ -31,33 +31,36 @@ def about():
     return render_template('www.intellipaat.com')
 
 
-@app.route("/addemp", methods=['POST'])
-def AddEmp():
-    emp_id = request.form['emp_id']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
-    location = request.form['location']
-    emp_image_file = request.files['emp_image_file']
+@app.route("/addvehicles", methods=['POST'])
+def AddVehicles():
+    Name = request.form['Name']
+    Address = request.form['Address']
+    Phone = request.form['Phone']
+    Email= request.form['Email']
+    License = request.form['License']
+    Model = request.form['Model']
+    Color = request.form['Color']
+    Year = request.form['Year']
+    Owner = request.form['Owner']
+    Upload_Document = request.files['Upload_Document']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO VehicleDetails VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
-    if emp_image_file.filename == "":
+    if Upload_Document.filename == "":
         return "Please select a file"
 
     try:
 
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+        cursor.execute(insert_sql, (Name, Address, Phone, Email, License,Model,Color,Year,Owner))
         db_conn.commit()
-        emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        Upload_Document_file_name_in_s3 = "Model-" + str(Year) + "_image_file"
         s3 = boto3.resource('s3')
 
         try:
             print("Data inserted in MySQL RDS... uploading image to S3...")
-            s3.Bucket(custombucket).put_object(Key=emp_image_file_name_in_s3, Body=emp_image_file)
+            s3.Bucket(custombucket).put_object(Key=Upload_Document_file_name_in_s3, Body=Upload_Document)
             bucket_location = boto3.client('s3').get_bucket_location(Bucket=custombucket)
             s3_location = (bucket_location['LocationConstraint'])
 
@@ -69,7 +72,7 @@ def AddEmp():
             object_url = "https://s3{0}.amazonaws.com/{1}/{2}".format(
                 s3_location,
                 custombucket,
-                emp_image_file_name_in_s3)
+                Upload_Document_file_name_in_s3)
 
         except Exception as e:
             return str(e)
@@ -78,7 +81,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('AddEmpOutput.html', name=emp_name)
+    return render_template('AddVechicleoutput.html', name=Name)
 
 
 if __name__ == '__main__':
